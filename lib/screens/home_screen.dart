@@ -13,10 +13,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Personal Budgeting App',
-          style: GoogleFonts.lobster(
-            color: AppColors.darkText,
+          style: GoogleFonts.playfairDisplay(
+            color: AppColors.lightText,
           ),
         ),
+        centerTitle: true,
         backgroundColor: AppColors.bgcolor,
       ),
       body: StreamBuilder(
@@ -87,36 +88,55 @@ class BudgetCategoryCard extends StatelessWidget {
           ],
         ),
         padding: const EdgeInsets.all(16),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                doc['name'],
-                style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkText,
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  doc['name'],
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.darkText,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Budgeted: \$${doc['budgeted']}',
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: AppColors.darkText,
+                const SizedBox(height: 10),
+                Text(
+                  'Budgeted: \$${doc['budgeted']}',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 16,
+                    color: AppColors.darkText,
+                  ),
                 ),
-              ),
-              Text(
-                'Spent: \$${doc['spent']}',
-                style: GoogleFonts.roboto(
-                  fontSize: 16,
-                  color: AppColors.darkText,
+                Text(
+                  'Spent: \$${doc['spent']}',
+                  style: GoogleFonts.playfairDisplay(
+                    fontSize: 16,
+                    color: AppColors.darkText,
+                  ),
                 ),
+              ],
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.edit,
+                  color: AppColors.primary,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddEditBudgetScreen(doc: doc),
+                    ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

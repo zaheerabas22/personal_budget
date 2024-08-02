@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:personal_budget/custom_widgets/colors.dart';
 
 class AddEditBudgetScreen extends StatefulWidget {
@@ -32,37 +33,53 @@ class _AddEditBudgetScreenState extends State<AddEditBudgetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.doc == null
-            ? 'Add Budget Category'
-            : 'Edit Budget Category'),
+        title: Text(
+          widget.doc == null ? 'Add Budget Category' : 'Edit Budget Category',
+          style: GoogleFonts.playfairDisplay(
+            color: AppColors.lightText,
+          ),
+        ),
         backgroundColor: AppColors.bgcolor,
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: AppColors.lightText,
+          ),
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 15, top: 20),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 35,
+        ),
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildTextField(
                 controller: _nameController,
                 label: 'Category Name',
                 icon: Icons.category,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               _buildTextField(
                 controller: _budgetedController,
                 label: 'Budgeted Amount',
                 icon: Icons.attach_money,
                 keyboardType: TextInputType.number,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               _buildTextField(
                 controller: _spentController,
                 label: 'Spent Amount',
                 icon: Icons.money_off,
                 keyboardType: TextInputType.number,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -129,8 +146,9 @@ class _AddEditBudgetScreenState extends State<AddEditBudgetScreen> {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: GoogleFonts.playfairDisplay(),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(17),
+          borderRadius: BorderRadius.circular(30),
         ),
         filled: true,
         fillColor: Colors.white,
@@ -154,14 +172,14 @@ class _AddEditBudgetScreenState extends State<AddEditBudgetScreen> {
     Color textColor = Colors.white,
   }) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.35,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(17),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
         child: Text(
