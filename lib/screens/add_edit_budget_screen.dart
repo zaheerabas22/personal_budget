@@ -9,10 +9,10 @@ class AddEditBudgetScreen extends StatefulWidget {
   const AddEditBudgetScreen({super.key, this.doc});
 
   @override
-  _AddEditBudgetScreenState createState() => _AddEditBudgetScreenState();
+  AddEditBudgetScreenState createState() => AddEditBudgetScreenState();
 }
 
-class _AddEditBudgetScreenState extends State<AddEditBudgetScreen> {
+class AddEditBudgetScreenState extends State<AddEditBudgetScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _budgetedController = TextEditingController();
